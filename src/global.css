@@ -1,0 +1,93 @@
+:root {
+  /* Colors */
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --text-color: #333;
+
+  /* Typography */
+  --font-family-base: 'Arial', sans-serif;
+  --font-size-base: 16px;
+
+  /* Spacing */
+  --spacing-small: 8px;
+  --spacing-large: 24px;
+}
+
+
+/* Base Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    font-size: 16px;
+    overflow-x: hidden;
+}
+
+img, video {
+    max-width: 100%;
+    height: auto;
+}
+
+
+h1, h2, h3 {
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+h4, h5, h6 {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+input, button, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Responsive Utility */
+@media (max-width: 768px) {
+  .container {
+      padding: 0 15px;
+  }
+
+  .grid {
+      grid-template-columns: 1fr;
+  }
+}

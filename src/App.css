@@ -1,0 +1,61 @@
+/* Component */
+.card {
+  background-color: #fff;
+  border-radius: 8px;     /* Smooth corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Light shadow for depth */
+  overflow: hidden;       /* Hides overflow content if card has rounded corners */
+  padding: 20px;          /* Internal padding */
+  margin: 10px 0;         /* Vertical margin for spacing */
+}
+
+/* Layout */
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;    /* Center items horizontally */
+  align-items: center;        /* Center items vertically */
+  gap: 20px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;     /* Arrange items in a vertical column */
+  gap: 20px;
+
+}
+
+.justify-between {
+  display: flex;
+  justify-content: space-between;  /* Spread items across full width */
+}
+
+.align-center {
+  align-items: center;        /* Align items vertically to center */
+}
+
+
+/* Layout */
+.grid {
+  display: grid;
+  gap: 20px;                    /* Space between grid items */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive columns */
+}
+
+
+/* Component */
+.btn {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #2980b9;   /* Darkens on hover */
+}
