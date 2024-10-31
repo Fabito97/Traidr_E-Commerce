@@ -86,6 +86,10 @@
 .align-center { align-items: center; }
 .align-end { align-items: flex-end; }
 
+.gap-40 {
+  gap: 40px !important;
+}
+
 /* --- Text Styling --- */
 .text-uppercase { text-transform: uppercase; }
 .text-lowercase { text-transform: lowercase; }
@@ -109,14 +113,15 @@
 .cursor-default { cursor: default; }
 
 /* --- Background & Text Colors --- */
-.bg-primary { background-color: #3498db; }
+.bg-primary { background-color: #E04F16; }
 .bg-secondary { background-color: #2ecc71; }
 .bg-light { background-color: #f9f9f9; }
 .bg-dark { background-color: #333; }
-.text-primary { color: #3498db; }
+.text-primary { color: #E04F16; }
 .text-secondary { color: #2ecc71; }
 .text-light { color: #f9f9f9; }
 .text-dark { color: #333; }
+.text-aux { color: #219653 }
 
 .border-radius { border-radius: 8px; }
 .shadow { box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
