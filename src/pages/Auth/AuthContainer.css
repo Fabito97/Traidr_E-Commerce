@@ -1,0 +1,20 @@
+/* src/components/AuthContainer.css */
+.auth-background {
+    background-image: url('../../assets/Auth_assets/background.jpg'); /* Replace with your background image path */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .auth-form-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    /* width: 100%; */
+    max-width: 500px;
+    text-align: center;
+  }
