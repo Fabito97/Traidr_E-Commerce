@@ -11,6 +11,7 @@ import Auth from './pages/Auth/Auth'
 import Admin from './pages/Admin/Admin'
 import SignUp from './pages/Auth/SignUp'
 import Login from './pages/Auth/Login'
+import UserloggedinScreen from './pages/UserloggedinScreen/UserloggedinScreen'
 
 
 const router = createBrowserRouter(
@@ -23,6 +24,10 @@ const router = createBrowserRouter(
           path: '',
           element: <Home /> 
         },
+        {
+          path: '/userloggedin',
+          element: <UserloggedinScreen /> 
+        }
       ]
     },
     {
