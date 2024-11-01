@@ -9,6 +9,7 @@ import AdminLayout from './layouts/adminLayout'
 import Home from './pages/Home/Home'
 import Auth from './pages/Auth/Auth'
 import Admin from './pages/Admin/Admin'
+import UserloggedinScreen from './pages/UserloggedinScreen/UserloggedinScreen'
 
 
 const router = createBrowserRouter(
@@ -21,6 +22,10 @@ const router = createBrowserRouter(
           path: '',
           element: <Home /> 
         },
+        {
+          path: '/userloggedin',
+          element: <UserloggedinScreen /> 
+        }
       ]
     },
     {
