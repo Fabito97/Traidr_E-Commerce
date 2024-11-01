@@ -9,6 +9,8 @@ import AdminLayout from './layouts/adminLayout'
 import Home from './pages/Home/Home'
 import Auth from './pages/Auth/Auth'
 import Admin from './pages/Admin/Admin'
+import SignUp from './pages/Auth/SignUp'
+import Login from './pages/Auth/Login'
 
 
 const router = createBrowserRouter(
@@ -24,12 +26,16 @@ const router = createBrowserRouter(
       ]
     },
     {
-      path: "/auth",
+      path: "/",
       element: <AuthLayout />, // Sign up related layout
       children: [
         {
-          path: '',
-          element: <Auth />    
+          path: '/signup',
+          element: <SignUp />    
+        },
+        {
+          path: '/login',
+          element: <Login />    
         }
       ]
     },
