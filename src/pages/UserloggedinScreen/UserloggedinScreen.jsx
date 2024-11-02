@@ -56,8 +56,8 @@ const Sidebar = () => {
     return (
         <aside className="sidebar mt-2">
             <div className=''>
-                <h1 className='mt-4'>Categories</h1>
-                <h3>Filters</h3>
+                <h1 className='mt-4 mb-3'>Categories</h1>
+                <h3 className='mb-3'>Filters</h3>
                 <div className="filter mb-3">
                     <h4>Deals</h4>
                     {/* Add checkbox filters */}

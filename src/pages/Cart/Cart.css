@@ -11,6 +11,10 @@
     flex-direction: column;
   }
 
+  .cart-item .product-card {
+    border: none !important
+  }
+
   .cart-items div.flex-column {
     flex-direction: row;
     margin-left: auto;

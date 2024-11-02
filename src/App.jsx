@@ -18,6 +18,7 @@ import Login from './pages/Auth/Login'
 import UserloggedinScreen from './pages/UserloggedinScreen/UserloggedinScreen'
 import Product from './pages/Product/Product';
 import Cart from './pages/Cart/Cart';
+import Shop from './pages/Shop/Shop';
 // import ProductDescription from './pages/ProductDescription/ProductDescription'
 
 

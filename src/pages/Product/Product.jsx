@@ -9,21 +9,14 @@ import ImageUpload from './ImageUpload';
 import Button from '../../components/Button';
 
 const Product = () => {
-  const [inputClass, setInputClass] = useState('display-none');
-  const inputRef = useRef(null);
-
-  const handleInputDisplay = () => {
-    setInputClass('display-block');
-    setTimeout(() => inputRef.current.focus());
-  };
 
   return (
-    <div className="p-4 container">
+    <div className="p-4 container product-section">
       <UserShopProfile />
 
       <div className="mt-2">
         <h2 className="mb-1">Upload Images</h2>
-        <div className="border p-5 grid">
+        <div className="border p-5 grid-p">
           <div className='mr-2 photo-upload-tip'>
             <h2 className="mb-1">Photos</h2>
             <p style={{fontSize:'12px'}} className="mb-2 faint">

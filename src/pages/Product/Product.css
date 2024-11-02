@@ -2,10 +2,6 @@
   padding: 2rem;
 }
 
-.product-section .image-upload-card {
-  margin: 4rem 0;
-}
-
 .product-section .image-upload-card label {
   margin-top: 10px;
 }
@@ -21,15 +17,15 @@
   grid-column: span 3;
 }
 
-.image-upload-card {
+.product-section .image-upload-card {
   grid-column: span 2;
 }
 
-.product-card {
+.product-section .product-card {
   grid-column: span 2;
 }
 
-.grid {
+.grid-p {
   display: grid;
   gap: 20px;                    /* Space between grid items */
   grid-template-columns:  repeat(auto-fill,  minmax(85px, 1fr)); /* Responsive columns */
