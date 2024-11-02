@@ -1,8 +1,16 @@
-import './Auth.css'
+import './AuthContainer.css'
+import Login from './Login'
+import SignUp from './SignUp'
+import './FormStyles.css'
 
 const Auth = () => {
   return (
-    <section className='auth-section'>Auth</section>
+    <div>
+      <SignUp/>
+      <Login/>
+
+      
+    </div>
   )
 }
 

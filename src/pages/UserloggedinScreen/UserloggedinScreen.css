@@ -1,0 +1,76 @@
+
+/* 
+.sidebar {
+    width: 300px;
+    padding: 1rem;
+    height: 100vh; 
+    position: fixed; 
+    top: 80px; 
+    bottom: -500px;
+}
+
+.search-sort-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.product-grid-section {
+    width: 100vh;
+    margin-left: auto;
+}
+
+.product-grid {
+    padding: 1rem;
+
+} */
+
+
+.userloggedin-section {
+    display: flex;
+}
+
+.sidebar {
+    width: 300px;
+    padding: 1rem;
+    height: 100vh; /* Make sidebar full-height */
+    position: sticky; /* Stick sidebar in place on scroll */
+    top: 0; 
+}
+
+.search-sort-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.product-grid {
+    padding: 1rem;
+}
+
+.grid-sm {
+    display: grid;
+    gap: 20px;                    /* Space between grid items */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive columns */
+  }
+
+/* .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+} */
+
+.product-card {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.like-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: red;
+    cursor: pointer;
+}

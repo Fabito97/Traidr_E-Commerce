@@ -45,10 +45,22 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive columns */
 }
 
+.grid-md {
+  display: grid;
+  gap: 30px;                    /* Space between grid items */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive columns */
+}
+
 .grid-bg {
   display: grid;
   gap: 30px;                    /* Space between grid items */
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive columns */
+}
+
+.grid-sm {
+  display: grid;
+  gap: 30px;                    /* Space between grid items */
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Responsive columns */
 }
 
 
