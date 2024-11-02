@@ -2,7 +2,7 @@ import './Auth.css'
 
 const Auth = () => {
   return (
-    <div>Auth</div>
+    <section className='auth-section'>Auth</section>
   )
 }
 

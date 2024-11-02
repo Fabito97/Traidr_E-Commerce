@@ -2,7 +2,7 @@
 
 /* --- Container --- */
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 16px; /* Optional padding */
 }
@@ -15,17 +15,27 @@
 .p-4 { padding: 40px; }
 .p-5 { padding: 50px; }
 
+.py-1 { padding: 0 10px; }
+.py-2 { padding: 0 20px; }
+.py-3 { padding: 0 30px; }
+.py-4 { padding: 0 40px; }
+.py-5 { padding: 0 50px; }
+
+.pt-0 { padding-top: 0; }
 .pt-1 { padding-top: 10px; }
 .pt-2 { padding-top: 20px; }
 .pt-3 { padding-top: 30px; }
-.pt-4 { padding-top: 40px; }
-.pt-5 { padding-top: 50px; }
+.pt-4 { padding-top: 45px; }
+.pt-5 { padding-top: 60px; }
+.pt-6 { padding-top: 75px; }
 
+.pt-0 { padding-bottom: 0; }
 .pb-1 { padding-bottom: 10px; }
-.pb-2 { padding-bottom: 20px; }
-.pb-3 { padding-bottom: 30px; }
-.pb-4 { padding-bottom: 40px; }
-.pb-5 { padding-bottom: 50px; }
+.pb-2 { padding-bottom: 10px; }
+.pb-3 { padding-bottom: 20px; }
+.pb-4 { padding-bottom: 45px; }
+.pb-5 { padding-bottom: 60px; }
+.pb-6 { padding-bottom: 75px; }
 
 /* Padding for left and right */
 .pl-1 { padding-left: 10px; }
@@ -38,6 +48,12 @@
 .pr-1 { padding-right: 4px; }
 
 /* --- Margin Utilities --- */
+.my-1 { margin: 0 10px; }
+.my-2 { margin: 0 20px; }
+.my-3 { margin: 0 30px; }
+.my-4 { margin: 0 40px; }
+.my-5 { margin: 0 50px; }
+
 .m-0 { margin: 0; }
 .m-1 { margin: 10px; }
 .m-2 { margin: 20px; }
@@ -45,12 +61,14 @@
 .m-4 { margin: 40px; }
 .m-5 { margin: 50px; }
 
+.mt-0 { margin-top: 0; }
 .mt-1 { margin-top: 10px; }
 .mt-2 { margin-top: 20px; }
 .mt-3 { margin-top: 30px; }
 .mt-4 { margin-top: 40px; }
 .mt-5 { margin-top: 50px; }
 
+.mb-0 { margin-bottom: 0; }
 .mb-1 { margin-bottom: 10px; }
 .mb-2 { margin-bottom: 20px; }
 .mb-3 { margin-bottom: 30px; }
@@ -86,6 +104,10 @@
 .align-center { align-items: center; }
 .align-end { align-items: flex-end; }
 
+.gap-40 {
+  gap: 40px !important;
+}
+
 /* --- Text Styling --- */
 .text-uppercase { text-transform: uppercase; }
 .text-lowercase { text-transform: lowercase; }
@@ -96,8 +118,11 @@
 /* --- Width/Height Utilities --- */
 .w-100 { width: 100%; }
 .w-50 { width: 50%; }
-.h-100 { height: 100%; }
-.h-50 { height: 50%; }
+.w-60 { width: 60%; }
+.w-70 { width: 70%; }
+.w-80 { width: 80%; }
+.h-90 { height: 90%; }
+.h-40 { height: 40%; }
 
 /* --- Overflow Control --- */
 .overflow-hidden { overflow: hidden; }
@@ -109,14 +134,22 @@
 .cursor-default { cursor: default; }
 
 /* --- Background & Text Colors --- */
-.bg-primary { background-color: #3498db; }
+.bg-primary { background-color: #E04F16; }
 .bg-secondary { background-color: #2ecc71; }
 .bg-light { background-color: #f9f9f9; }
 .bg-dark { background-color: #333; }
-.text-primary { color: #3498db; }
+.text-primary { color: #E04F16; }
 .text-secondary { color: #2ecc71; }
 .text-light { color: #f9f9f9; }
 .text-dark { color: #333; }
 
 .border-radius { border-radius: 8px; }
 .shadow { box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+
+.border { border: 1px solid #ddd}
+.border-b { border-bottom: 1px solid #ddd}
+
+.display-none {
+  display: none;
+}
+

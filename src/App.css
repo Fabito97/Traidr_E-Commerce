@@ -11,6 +11,7 @@
 /* Layout */
 .flex {
   display: flex;
+  gap: 15px;
 }
 
 .flex-center {
@@ -44,6 +45,12 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Responsive columns */
 }
 
+.grid-bg {
+  display: grid;
+  gap: 30px;                    /* Space between grid items */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive columns */
+}
+
 
 /* Component */
 .btn {
@@ -58,4 +65,13 @@
 
 .btn:hover {
   background-color: #2980b9;   /* Darkens on hover */
+}
+
+
+.faint {
+  color: #aaa;
+}
+
+.fainter {
+  color: #ddd;
 }

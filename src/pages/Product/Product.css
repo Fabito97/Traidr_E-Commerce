@@ -1,0 +1,88 @@
+.product-section {
+  padding: 2rem;
+}
+
+.product-section .image-upload-card {
+  margin: 4rem 0;
+}
+
+.product-section .image-upload-card label {
+  margin-top: 10px;
+}
+.upload-item .image-upload-card {
+  margin: 0;
+}
+
+.upload-item .item-card {
+  gap: 2rem;
+}
+
+.photo-upload-tip {
+  grid-column: span 3;
+}
+
+.image-upload-card {
+  grid-column: span 2;
+}
+
+.product-card {
+  grid-column: span 2;
+}
+
+.grid {
+  display: grid;
+  gap: 20px;                    /* Space between grid items */
+  grid-template-columns:  repeat(auto-fill,  minmax(85px, 1fr)); /* Responsive columns */
+}
+
+@media screen and (max-width:850px) {
+  .upload-item .flex {
+    flex-direction: column;
+  }
+
+  .upload-item .image-upload-card label {
+    margin: -10px auto;
+  }
+
+}
+
+@media screen and (max-width:500px) {
+  .shop-profile {
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+    row-gap: 2rem;
+    margin: auto;
+    text-align: center;
+    padding-bottom: 0;
+  }
+}
+
+
+@media screen and (max-width:500px) {
+  .shop-profile {
+    flex-direction: column;
+    margin-bottom: 4rem;
+    margin-top: 1.5rem;
+    align-items: flex-start;
+  }
+
+  div.border.grid {
+   display: block;
+   padding: 2rem
+  }
+
+  .upload-tip, div.border.grid .image-upload-card, .product-card {
+    margin-bottom: 2rem;
+  }
+
+  .product-card {
+    margin-top: 2rem;
+  }
+
+  .product-section .image-upload-card {
+    margin: 1rem 0 ;
+  }
+
+
+}
