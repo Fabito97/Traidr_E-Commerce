@@ -11,6 +11,7 @@
 /* Layout */
 .flex {
   display: flex;
+  gap: 15px;
 }
 
 .flex-center {

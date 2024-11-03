@@ -19,7 +19,7 @@ const Main = () => {
         <div className="main_why">
           <div className='main_why_h1'>
             <h1 className='mb-3'>
-              Why use <span className='text-primary'>traider</span>?
+              Why use <span className='text-primary'>traidr </span>?
             </h1>
           </div>
           <div className="main_why_section">

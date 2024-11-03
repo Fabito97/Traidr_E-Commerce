@@ -8,7 +8,7 @@ const Products = () => {
           <div className="products_h3">
             <h1 className="mb-3">Trending Sales</h1>
           </div>
-          <div className="productGrid grid">
+          <div className="productGrid grid-md">
             {ProductList.map((product, key) => {
               return (
                 <div key={key} className="productGrid_item ">

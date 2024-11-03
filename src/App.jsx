@@ -1,5 +1,9 @@
-import { useState } from 'react'
-import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { useState } from 'react';
+import {
+  BrowserRouter,
+  createBrowserRouter,
+  RouterProvider,
+} from 'react-router-dom';
 
 import './utilities.css'
 import './App.css'
@@ -12,6 +16,10 @@ import Admin from './pages/Admin/Admin'
 import SignUp from './pages/Auth/SignUp'
 import Login from './pages/Auth/Login'
 import UserloggedinScreen from './pages/UserloggedinScreen/UserloggedinScreen'
+import Product from './pages/Product/Product';
+import Cart from './pages/Cart/Cart';
+import Shop from './pages/Shop/Shop';
+// import ProductDescription from './pages/ProductDescription/ProductDescription'
 
 
 const router = createBrowserRouter(
@@ -27,7 +35,23 @@ const router = createBrowserRouter(
         {
           path: '/userloggedin',
           element: <UserloggedinScreen /> 
-        }
+        },        
+        {
+          path: '/product',
+          element: <Product />,
+        },
+        {
+          path: '/shop',
+          element: <Shop />,
+        },
+           // {
+      //   path: '/product-description',
+      //   element: <ProductDescription />
+      // },
+        {
+          path: '/cart',
+          element: <Cart />,
+        },
       ]
     },
     {
@@ -58,13 +82,7 @@ const router = createBrowserRouter(
 )
 
 function App() {
-  
-
-  return (
-    
-     <RouterProvider router={router}/>
-    
-  )
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
