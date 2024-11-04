@@ -19,7 +19,7 @@ import UserloggedinScreen from './pages/UserloggedinScreen/UserloggedinScreen'
 import Product from './pages/Product/Product';
 import Cart from './pages/Cart/Cart';
 import Shop from './pages/Shop/Shop';
-// import ProductDescription from './pages/ProductDescription/ProductDescription'
+import ProductDescription from './pages/ProductDescription/ProductDescription';
 
 
 const router = createBrowserRouter(
@@ -44,10 +44,10 @@ const router = createBrowserRouter(
           path: '/shop',
           element: <Shop />,
         },
-           // {
-      //   path: '/product-description',
-      //   element: <ProductDescription />
-      // },
+            {
+        path: '/product-description',
+         element: <ProductDescription/>
+       },
         {
           path: '/cart',
           element: <Cart />,
