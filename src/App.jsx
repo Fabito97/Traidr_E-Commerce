@@ -19,6 +19,8 @@ import UserloggedinScreen from './pages/UserloggedinScreen/UserloggedinScreen'
 import Product from './pages/Product/Product';
 import Cart from './pages/Cart/Cart';
 import Shop from './pages/Shop/Shop';
+import PasswordResetForm from './pages/Auth/PasswordResetForm';
+import PasswordResetRequest from './pages/Auth/PasswordResetRequest';
 // import ProductDescription from './pages/ProductDescription/ProductDescription'
 
 
@@ -65,6 +67,14 @@ const router = createBrowserRouter(
         {
           path: '/login',
           element: <Login />    
+        },
+        {
+          path: '/reset-password',
+          element: <PasswordResetRequest/>    
+        },
+        {
+          path: '/send-reset-password',
+          element: <PasswordResetForm/>    
         }
       ]
     },
