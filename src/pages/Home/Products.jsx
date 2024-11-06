@@ -1,12 +1,8 @@
 import { FaCartShopping } from 'react-icons/fa6';
 import StarRating from '../../components/StarRating';
-import { ProductList } from './Helpers/ProductList';
-import { Children, createContext, useEffect, useState } from 'react';
-import { AddToCart, currency, getCartItems } from '../../../utils/cartUtils';
-import { getProducts } from '../../../utils/api';
+import {currency } from '../../../utils/cartUtils';
+import { getData } from '../../../utils/api';
 import { useQuery } from '@tanstack/react-query';
-import Loading from '../../components/Loading';
-import { Link } from 'react-router-dom';
 import { useCart } from '../../context/cartContext';
 
 
@@ -17,7 +13,7 @@ const Products = () => {
   
   const { data, isLoading, error } = useQuery({
     queryKey: ['products'],
-    queryFn: getProducts,
+    queryFn: () => getData('Product'),
   });
 
   const handleCart = (product) => {

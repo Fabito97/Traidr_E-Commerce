@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { AddToCart, getCartItems } from '../../utils/cartUtils';
+import { toast } from 'react-toastify';
 
 const CartContext = createContext();
 
@@ -19,8 +20,8 @@ export const CartProvider = ({ children }) => {
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
-      }
-      console.log('About to save', prevCart);
+      }      
+      toast.success('Item added to cart');
       return [...prevCart, { ...newItem, quantity: 1 }];
     });
   };

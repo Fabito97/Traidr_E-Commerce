@@ -5,9 +5,9 @@ const baseUrl = 'https://localhost:7268/api';
 const productApiUrl = `${baseUrl}/Product`;
 
 // Get all products
-export const getProducts = async () => {
+export const getData = async (url) => {
     try {
-        const res = await axios.get(`${productApiUrl}`);
+        const res = await axios.get(`${baseUrl}/${url}`);
         return res.data.data.$values;
     } catch (error) {
         console.error("Error fetching products:", error);
@@ -15,7 +15,7 @@ export const getProducts = async () => {
 };
 
 // Get a single product by ID
-export const getProduct = async (id) => {
+export const getDataById = async (id) => {
     try {
         const res = await axios.get(`${productApiUrl}/${id}`);
         return res.data.data.$values;
@@ -24,15 +24,17 @@ export const getProduct = async (id) => {
     }
 };
 
-// Create a new product
-export const createProduct = async (product) => {
+
+export const postData = async ({ url, data }) => {
+    console.log("Data being sent:", data);
     try {
-        const res = await axios.post(`${productApiUrl}/create-product`, product, {
+        const res = await axios.post(`${baseUrl}/${url}`, data, {
             headers: { "Content-Type": "application/json" }
         });
         return res.data;
     } catch (error) {
         console.error("Error creating product:", error);
+       throw error.response?.data || new Error("Unknown erro")
     }
 };
 

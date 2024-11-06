@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   BrowserRouter,
   createBrowserRouter,
@@ -23,6 +23,8 @@ import PasswordResetForm from './pages/Auth/PasswordResetForm';
 import PasswordResetRequest from './pages/Auth/PasswordResetRequest';
 import Loading from './components/Loading';
 import { CartProvider } from './context/cartContext';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // import ProductDescription from './pages/ProductDescription/ProductDescription'
 
 const router = createBrowserRouter([
@@ -50,49 +52,62 @@ const router = createBrowserRouter([
       //   path: '/product-description',
       //   element: <ProductDescription />
       // },
-        {
-          path: '/cart',
-          element: <Cart />,
-        },
-      ]
-    },
-    {
-      path: "/",
-      element: <AuthLayout />, // Sign up related layout
-      children: [
-        {
-          path: '/signup',
-          element: <SignUp />    
-        },
-        {
-          path: '/login',
-          element: <Login />    
-        },
-        {
-          path: '/reset-password',
-          element: <PasswordResetRequest/>    
-        },
-        {
-          path: '/send-reset-password',
-          element: <PasswordResetForm/>    
-        }
-      ]
-    },
-    {
-      path: "/admin",
-      element: <AdminLayout/>, // Admin layout
-      children: [
-        {
-          path: "",
-          element: <Admin />,   
-        }
-      ]
-    },
-  ]
-)
+      {
+        path: '/cart',
+        element: <Cart />,
+      },
+    ],
+  },
+  {
+    path: '/',
+    element: <AuthLayout />, // Sign up related layout
+    children: [
+      {
+        path: '/signup',
+        element: <SignUp />,
+      },
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/reset-password',
+        element: <PasswordResetRequest />,
+      },
+      {
+        path: '/send-reset-password',
+        element: <PasswordResetForm />,
+      },
+    ],
+  },
+  {
+    path: '/admin',
+    element: <AdminLayout />, // Admin layout
+    children: [
+      {
+        path: '',
+        element: <Admin />,
+      },
+    ],
+  },
+]);
 
 function App() {
-    return <RouterProvider router={router} />;
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <>
+      {isLoading ? <Loading /> : <RouterProvider router={router} />}
+      <ToastContainer position="top-right" autoClose={3000} />
+    </>
+  );
 }
 
 export default App;
