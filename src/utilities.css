@@ -123,6 +123,9 @@
 .w-80 { width: 80%; }
 .h-90 { height: 90%; }
 .h-40 { height: 40%; }
+.h-screen { height: 100vh; }
+.h-screen-70 { height: 70vh; }
+.w-screen { width: 100vw; }
 
 /* --- Overflow Control --- */
 .overflow-hidden { overflow: hidden; }
@@ -135,11 +138,11 @@
 
 /* --- Background & Text Colors --- */
 .bg-primary { background-color: #E04F16; }
-.bg-secondary { background-color: #2ecc71; }
+.bg-secondary { background-color: #FEC84B; }
 .bg-light { background-color: #f9f9f9; }
 .bg-dark { background-color: #333; }
 .text-primary { color: #E04F16; }
-.text-secondary { color: #2ecc71; }
+.text-secondary { color: #FEC84B; }
 .text-light { color: #f9f9f9; }
 .text-dark { color: #333; }
 .text-aux { color: #219653 }
@@ -153,4 +156,17 @@
 .display-none {
   display: none;
 }
+
+.disabled {
+  filter: brightness(50%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.hover:hover {
+  opacity: 0.8;
+}
+
+
+
 

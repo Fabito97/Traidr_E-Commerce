@@ -1,6 +1,36 @@
-import { ProductList } from './Helpers/ProductList';
+import { FaCartShopping } from 'react-icons/fa6';
+import StarRating from '../../components/StarRating';
+import {currency } from '../../../utils/cartUtils';
+import { getData } from '../../../utils/api';
+import { useQuery } from '@tanstack/react-query';
+import { useCart } from '../../context/cartContext';
+import { Link, Navigate, useNavigation } from 'react-router-dom';
+
+
 
 const Products = () => {
+  const {addItemToCart} = useCart()
+
+  const navigate = useNavigation();
+  
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['products'],
+    queryFn: () => getData('Product'),
+  });
+
+  const handleCart = (product) => {
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      image: product.images.$values[0]
+    }
+    console.log("Adding product to cart:", cartItem);
+
+   addItemToCart(cartItem)
+  }
+  
   return (
     <>
       <div className="productSection p-4">
@@ -9,27 +39,45 @@ const Products = () => {
             <h1 className="mb-3">Trending Sales</h1>
           </div>
           <div className="productGrid grid-md">
-            {ProductList.map((product, key) => {
+            {data?.map((product) => {
               return (
-                <div key={key} className="productGrid_item ">
+                <Link to={`/product-description/${product.id}`}                
+                  key={product.id}
+                  className="productGrid_item "
+                >
                   <div className="img-wrap">
                     <div className="product-img">
                       <img
                         className=""
-                        src={product.imageUrl}
+                        src={product.images.$values[0]}
                         alt={product.title}
                       />
                     </div>
                   </div>
                   <div className="productGrid_item_description">
-                    <h4 className="m-0">{product.title}</h4>
+                    <h4 className="m-0 flex justify-between">
+                      {product.name}
+                      <span>
+                        <FaCartShopping
+                          className="text-primary hover cursor-pointer"
+                          onClick={(e) => {
+                            e.stopPropagation(); 
+                            handleCart(product);
+                          }}
+                        />
+                      </span>
+                    </h4>
                     <p className="faint">{product.description}</p>
 
-                    <div className="productGrid_item_price text-aux font-bold">
-                      <p>{product.price}</p>
+                    <div className="flex justify-between productGrid_item_price text-aux font-bold">
+                      <p>
+                        {currency}
+                        {product.price.toLocaleString()}
+                      </p>
+                      <StarRating className="text-light" />
                     </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
@@ -38,5 +86,7 @@ const Products = () => {
     </>
   );
 };
+
+
 
 export default Products;
