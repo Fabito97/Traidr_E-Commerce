@@ -14,6 +14,7 @@ const Shop = () => {
   const [isChecked, setIsChecked] = useState(false);
 
   const navigate = useNavigate();
+  
   const handleToggle = () => {
     toggle >= 4 ? navigate('/product'):
     setToggle(toggle + 1)

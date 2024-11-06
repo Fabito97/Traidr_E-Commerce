@@ -33,9 +33,9 @@
 .userloggedin-section .sidebar {
     width: 300px;
     padding: 1rem;
-    height: 100vh; /* Make sidebar full-height */
+    max-height: calc(100vh - 20px); /* Make sidebar full-height */
     position: sticky; /* Stick sidebar in place on scroll */
-    top: 0; 
+    top: 10px; 
 }
 
 .search-sort-bar {

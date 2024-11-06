@@ -7,7 +7,7 @@ const ProductCard = ({
   border='1px solid #ddd',
   marginBottom='5px',
   imgBorder,
-  className="flex-column"
+  className="flex-column",
 }) => {
   return (
     <div className='product-card'>

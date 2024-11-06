@@ -19,18 +19,18 @@ const Main = () => {
         <div className="main_why">
           <div className='main_why_h1'>
             <h1 className='mb-3'>
-              Why use <span className='text-primary'>traidr </span>?
+              Why use <span className='text-primary'>traidr</span>?
             </h1>
           </div>
           <div className="main_why_section">
             {repeatedElements.map((element, index) => (
               <div key={index} className="main_why_section_text">
-                <p className='main_why_section_text_p'>
+                <div className='main_why_section_text_p'>
                 <div className="icon-container">
                      <FontAwesomeIcon icon={element.icon} className="icon" />
                 </div>
                  {element.text} 
-                </p>
+                </div>
               </div>
             ))}
           </div>
