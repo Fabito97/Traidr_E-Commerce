@@ -25,7 +25,7 @@ import Loading from './components/Loading';
 import { CartProvider } from './context/cartContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import ProductDescription from './pages/ProductDescription/ProductDescription'
+import ProductDescription from './pages/ProductDescription/ProductDescription';
 
 const router = createBrowserRouter([
   {
@@ -48,10 +48,10 @@ const router = createBrowserRouter([
         path: '/shop',
         element: <Shop />,
       },
-      // {
-      //   path: '/product-description',
-      //   element: <ProductDescription />
-      // },
+      {
+        path: '/product-description',
+        element: <ProductDescription />
+      },
       {
         path: '/cart',
         element: <Cart />,

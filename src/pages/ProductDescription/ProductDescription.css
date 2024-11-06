@@ -1,0 +1,28 @@
+.img-showcase {
+  height: 400px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+.grid-bg-main {
+  display: grid;
+  place-items: center;
+  gap: 10px;                    /* Space between grid items */
+  grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); /* Responsive columns */
+}
+
+
+.product-decription .cart-btn {
+  display: block;
+  margin-left: auto;
+}
+
+@media screen and (max-width:1024px) {
+  .phone-2 {
+    display: block;
+  }
+}
