@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './ProductDescription.css';
 import image1 from '../../assets/image 22.png';
 import image2 from '../../assets/image 23.png';
@@ -6,8 +6,28 @@ import image3 from '../../assets/image 24.png';
 import profileImage from '../../assets/profile-image.png';
 import Button from '../../components/Button';
 import ProductCard from '../../components/ProductCard';
+import { useQuery } from '@tanstack/react-query';
+import { getData } from '../../../utils/api';
+import { currency } from '../../../utils/cartUtils';
+import { useCart } from '../../context/cartContext';
 
 const ProductDescription = () => {
+  const { id } = useParams();
+  const {addItemToCart} = useCart();
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['product', id],
+    queryFn: () => getData(`Product/${id}`),
+  });
+
+
+  if (isLoading) return <p>Loading product...</p>;
+  if (error) return <p>Error loading product details.</p>;
+
+  const productImages = data?.images.$values || []; // Ensure images array is defined
+   
+  console.log("I'm here", productImages);
+ 
   return (
     <div className="container p-5 product-decription">
       <div className="mt-2 mb-2">
@@ -22,23 +42,19 @@ const ProductDescription = () => {
         </Link>
       </div>
       <div className="grid-bg-main mt-2">
-        <div className="bg-light img-showcase">
-          <img src={image1} alt="" />
-        </div>
-        <div className="img-showcase bg-light">
-          <img src={image2} alt="" />
-        </div>
-        <div className="img-showcase bg-light">
-          <img src={image3} alt="" />
-        </div>
+        {productImages?.map((img) => ( 
+          <div className="bg-light img-showcase">
+            <img src={img} alt="" />
+          </div>
+         ))} 
       </div>
 
       <div className="mt-5 flex justify-between">
         <div className="">
           <small>3 Views in the last 2 minutes</small>
-          <h2 className="mt-1 mb-1">N30,000</h2>
+          <h2 className="mt-1 mb-1">{currency}{data.price.toLocaleString()}</h2>
           <p className="mt-1 mb-1">Wallphy Store</p>
-          <h3 className="mt-1 mb-1">Hens Blender sef</h3>
+          <h3 className="mt-1 mb-1">{data.name}</h3>
           <div className="flex align-center pb-3 pt-2">
             <small className="border p-1">Promoted</small>
             <small>Posted 2 mins ago</small>
@@ -58,10 +74,15 @@ const ProductDescription = () => {
             text="Add to Cart"
             background="#fff"
             color="#E04F16"
+            handleClick={() => addItemToCart(data)}
           />
-          <div className='flex-center'>
+          <div className="flex-center">
             <div>
-              <img style={{borderRadius:'50%', width:'70px'}} src={profileImage} alt="" />
+              <img
+                style={{ borderRadius: '50%', width: '70px' }}
+                src={profileImage}
+                alt=""
+              />
             </div>
             <div className="">
               <h2>Bankole Yufus</h2>
@@ -82,7 +103,7 @@ const ProductDescription = () => {
       </div>
 
       <div className="mt-5">
-        <h2 className="mb-2">Items Description</h2>
+        <h2 className="mb-2">{data.description}</h2>
         <p className="mb-3">Blender in Good condition</p>
         <div>
           <h2 className="mb-2">Shipping and return policies</h2>
@@ -123,9 +144,9 @@ const ProductDescription = () => {
         </div>
       </div>
 
-      <div className='mt-5 p-3'>
+      <div className="mt-5 p-3">
         <h2>Related Products</h2>
-        <div className='pt-3 grid'>
+        <div className="pt-3 grid-md">
           <ProductCard />
           <ProductCard />
           <ProductCard />

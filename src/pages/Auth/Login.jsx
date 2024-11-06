@@ -24,7 +24,7 @@ const Login = () => {
         localStorage.setItem('userToken', data.token);
         toast.success('Log in successful');
 
-        navigate('/shop')
+        navigate('/userloggedin')
       }
     },
 

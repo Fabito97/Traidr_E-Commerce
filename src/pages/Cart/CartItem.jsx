@@ -54,7 +54,7 @@ const CartItem = ({ item, deleteCart, updateCart }) => {
 
       <div className="flex-column align-center p-2">
         <div className="qty-btn flex align-center">
-          <Button text="-" handleClick={() => updateCart(item.id, item.quantity - 1)} />
+          <Button text="-" handleClick={() => updateCart(item.id, item.quantity - 1)}  className={item.quantity === 1 ? "disabled" : ''}/>
           <span className="p-1">{item.quantity}</span>
           
           <Button text="+"  handleClick={() => updateCart(item.id, item.quantity + 1)}/>

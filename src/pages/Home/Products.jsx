@@ -4,12 +4,14 @@ import {currency } from '../../../utils/cartUtils';
 import { getData } from '../../../utils/api';
 import { useQuery } from '@tanstack/react-query';
 import { useCart } from '../../context/cartContext';
+import { Link, Navigate, useNavigation } from 'react-router-dom';
 
 
 
 const Products = () => {
   const {addItemToCart} = useCart()
 
+  const navigate = useNavigation();
   
   const { data, isLoading, error } = useQuery({
     queryKey: ['products'],
@@ -39,8 +41,7 @@ const Products = () => {
           <div className="productGrid grid-md">
             {data?.map((product) => {
               return (
-                <div
-                  to="/product"
+                <Link to={`/product-description/${product.id}`}                
                   key={product.id}
                   className="productGrid_item "
                 >
@@ -59,7 +60,10 @@ const Products = () => {
                       <span>
                         <FaCartShopping
                           className="text-primary hover cursor-pointer"
-                          onClick={() => handleCart(product)}
+                          onClick={(e) => {
+                            e.stopPropagation(); 
+                            handleCart(product);
+                          }}
                         />
                       </span>
                     </h4>
@@ -68,12 +72,12 @@ const Products = () => {
                     <div className="flex justify-between productGrid_item_price text-aux font-bold">
                       <p>
                         {currency}
-                        {product.price}
+                        {product.price.toLocaleString()}
                       </p>
                       <StarRating className="text-light" />
                     </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

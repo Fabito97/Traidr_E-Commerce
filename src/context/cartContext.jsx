@@ -20,7 +20,7 @@ export const CartProvider = ({ children }) => {
             ? { ...item, quantity: item.quantity + 1 }
             : item
         );
-      }      
+      }
       toast.success('Item added to cart');
       return [...prevCart, { ...newItem, quantity: 1 }];
     });
@@ -41,7 +41,6 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem('cartItems', JSON.stringify(remainingCart));
         return remainingCart;
       });
-      
     } catch (error) {
       console.error('Error deleting item quantity:', error);
       return;
@@ -49,7 +48,15 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, setCart, addItemToCart, updateCartItemQuantity, deleteCartItem }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        setCart,
+        addItemToCart,
+        updateCartItemQuantity,
+        deleteCartItem,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

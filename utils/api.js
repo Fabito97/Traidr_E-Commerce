@@ -8,7 +8,9 @@ const productApiUrl = `${baseUrl}/Product`;
 export const getData = async (url) => {
     try {
         const res = await axios.get(`${baseUrl}/${url}`);
-        return res.data.data.$values;
+        console.log(res.data.data);
+
+        return res.data.data.$values ? res.data.data.$values : res.data.data;
     } catch (error) {
         console.error("Error fetching products:", error);
     }
