@@ -19,6 +19,8 @@ import UserloggedinScreen from './pages/UserloggedinScreen/UserloggedinScreen';
 import Product from './pages/Product/Product';
 import Cart from './pages/Cart/Cart';
 import Shop from './pages/Shop/Shop';
+import PasswordResetForm from './pages/Auth/PasswordResetForm';
+import PasswordResetRequest from './pages/Auth/PasswordResetRequest';
 import Loading from './components/Loading';
 import { CartProvider } from './context/cartContext';
 // import ProductDescription from './pages/ProductDescription/ProductDescription'
@@ -48,41 +50,46 @@ const router = createBrowserRouter([
       //   path: '/product-description',
       //   element: <ProductDescription />
       // },
-      {
-        path: '/cart',
-        element: <Cart />,
-      },
-    ],
-  },
-  {
-    path: '/',
-    element: <AuthLayout />, // Sign up related layout
-    children: [
-      {
-        path: '/signup',
-        element: <SignUp />,
-      },
-      {
-        path: '/login',
-        element: <Login />,
-      },
-    ],
-  },
-  {
-    path: '/admin',
-    element: <AdminLayout />, // Admin layout
-    children: [
-      {
-        path: '',
-        element: <Admin />,
-      },
-    ],
-  },
-  {
-    path: '*',
-    element: <Loading />,
-  },
-]);
+        {
+          path: '/cart',
+          element: <Cart />,
+        },
+      ]
+    },
+    {
+      path: "/",
+      element: <AuthLayout />, // Sign up related layout
+      children: [
+        {
+          path: '/signup',
+          element: <SignUp />    
+        },
+        {
+          path: '/login',
+          element: <Login />    
+        },
+        {
+          path: '/reset-password',
+          element: <PasswordResetRequest/>    
+        },
+        {
+          path: '/send-reset-password',
+          element: <PasswordResetForm/>    
+        }
+      ]
+    },
+    {
+      path: "/admin",
+      element: <AdminLayout/>, // Admin layout
+      children: [
+        {
+          path: "",
+          element: <Admin />,   
+        }
+      ]
+    },
+  ]
+)
 
 function App() {
     return <RouterProvider router={router} />;
