@@ -21,7 +21,7 @@ import Cart from './pages/Cart/Cart';
 import Shop from './pages/Shop/Shop';
 import PasswordResetForm from './pages/Auth/PasswordResetForm';
 import PasswordResetRequest from './pages/Auth/PasswordResetRequest';
-// import ProductDescription from './pages/ProductDescription/ProductDescription'
+import ProductDescription from './pages/ProductDescription/ProductDescription';
 
 
 const router = createBrowserRouter(
@@ -46,10 +46,10 @@ const router = createBrowserRouter(
           path: '/shop',
           element: <Shop />,
         },
-           // {
-      //   path: '/product-description',
-      //   element: <ProductDescription />
-      // },
+            {
+        path: '/product-description',
+         element: <ProductDescription/>
+       },
         {
           path: '/cart',
           element: <Cart />,
