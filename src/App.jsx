@@ -26,6 +26,7 @@ import { CartProvider } from './context/cartContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProductDescription from './pages/ProductDescription/ProductDescription';
+import Checkout from './pages/Checkout/Checkout';
 import ShopOpeningSection from './pages/Shop/ShopOpeningSection';
 import ProductListing from './pages/Shop/ProductListingSection';
 import ShopSecurity from './pages/Shop/ShopSecurity';
@@ -101,6 +102,10 @@ const router = createBrowserRouter([
         element: <PasswordResetForm />,
       },
     ],
+  },
+  {
+    path: "/checkout",
+    element: <Checkout/>, // Checkout layout
   },
   {
     path: '/admin',
