@@ -26,6 +26,10 @@ import { CartProvider } from './context/cartContext';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProductDescription from './pages/ProductDescription/ProductDescription';
+import ShopOpeningSection from './pages/Shop/ShopOpeningSection';
+import ProductListing from './pages/Shop/ProductListingSection';
+import ShopSecurity from './pages/Shop/ShopSecurity';
+import BusinessInfoForm from './pages/Shop/BusinessInfoForm';
 
 const router = createBrowserRouter([
   {
@@ -45,16 +49,34 @@ const router = createBrowserRouter([
         element: <Product />,
       },
       {
-        path: '/shop',
-        element: <Shop />,
-      },
-      {
         path: '/product-description/:id',
-        element: <ProductDescription />
+        element: <ProductDescription />,
       },
       {
         path: '/cart',
         element: <Cart />,
+      },
+    ],
+  },
+  {
+    path: '/',
+    element: <Shop />, // Sign up related layout
+    children: [
+      {
+        path: '/shop-opening',
+        element: <ShopOpeningSection />,
+      },
+      {
+        path: '/shop-product-listing',
+        element: <ProductListing />,
+      },
+      {
+        path: '/shop-business-info',
+        element: <BusinessInfoForm />,
+      },
+      {
+        path: '/shop-security',
+        element: <ShopSecurity />,
       },
     ],
   },

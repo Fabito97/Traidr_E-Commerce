@@ -6,7 +6,8 @@ const Button = ({
   text = 'Save and continue',
   borderRadius,
   className,
-  handleClick
+  handleClick,
+  children
 }) => {
   
   const style = {
@@ -17,7 +18,7 @@ const Button = ({
     borderRadius 
   };
 
-  return <button onClick={handleClick} className={className} style={style}>{text}</button>;
+  return <button onClick={handleClick} className={className} style={style}>{children} {text}</button>;
 };
 
 export default Button;

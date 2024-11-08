@@ -7,8 +7,12 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import Loading from '../../components/Loading';
 import { useCart } from '../../context/cartContext';
+import { isUserLoggedIn } from '../../../utils/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
+  const navigate = useNavigate();
+
   const { cart, setCart, updateCartItemQuantity, deleteCartItem } = useCart();
 
   const getTotalItems = () => {
@@ -41,7 +45,7 @@ const Cart = () => {
       {cart.length !== 0 ? (
         <>
           <CartSummary totalPrice={getTotalPrice()} />
-          <Button text="Proceed to checkout" />
+          <Button text="Proceed to checkout" handleClick={() => isUserLoggedIn ? navigate("/checkout") : navigate('/login')} />
         </>
       ) : (
         ''

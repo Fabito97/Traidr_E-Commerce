@@ -6,20 +6,9 @@ import { useState } from 'react';
 import { currency, updateCartItemQuantity } from '../../../utils/cartUtils';
 import { QueryClient } from '@tanstack/react-query';
 
-const queryClient = new QueryClient();
 
 const CartItem = ({ item, deleteCart, updateCart }) => {
-  const [quantity, setQuantity] = useState(1);
-
-
-  // const {mutate: updateQuantity} = useMutation({
-  //   mutationFn: (cart) => updateCartItemQuantity(cart),
-  //   onSuccess: () => {
-  //     queryClient.invalidateQueries({queryKey: ['cartItems']})
-  //   }
-  // })
-
-
+console.log("See me" , item);
   return (
     <div
       style={{ borderBottom: '1px solid #ddd' }}
@@ -38,7 +27,7 @@ const CartItem = ({ item, deleteCart, updateCart }) => {
             }}
             className="border overflow-hidden flex-center"
           >
-            <img width={100} src={item.image} alt="" />
+            <img width={100} src={item.image || item.image} alt="" />
           </div>
         </div>
 

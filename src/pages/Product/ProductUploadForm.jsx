@@ -1,37 +1,32 @@
-import { FaCamera, FaVideo } from 'react-icons/fa';
-import FormGroup from '../../components/FormGroup';
-import ProductListingImageUpload from './components/ImageUploadForm';
-import ProductListingVideoUpload from './components/VideoUploadFormUplod';
-import ProductListingDetails from './components/ProductListingDetails';
-import ProductListingShipping from './components/ProductListingShipping';
 import Button from '../../components/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postFormData } from '../../../utils/api';
 import { toast } from 'react-toastify';
+import ProductListingImageUpload from '../Shop/components/ImageUploadForm';
+import ProductListingVideoUpload from '../Shop/components/VideoUploadFormUplod';
+import ProductListingDetails from '../Shop/components/ProductListingDetails';
 
-const ProductListing = () => {
+const ProductUploadForm = ({setForm}) => {
   const [imageFiles, setImageFiles] = useState([]);
   const [videoFiles, setVideoFiles] = useState([]);
   const [productName, setProductName] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
-  const [deliveryTime, setDeliveryTime] = useState(1);
-  const [shippingFee, setShippingFee] = useState('');
-  const [shippingServices, setShippingServices] = useState('');
 
-  const navigate = useNavigate();
+  const queryClient = useQueryClient()
 
   const { mutate: createProduct } = useMutation({
     mutationFn: (product) =>
       postFormData({ url: 'Product/Create-Product', data: product }),
 
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
       toast.success('Product successfully saved');
-      navigate('/shop-business-info');
+      queryClient.invalidateQueries(['shop']);
+      queryClient.invalidateQueries(['products'])
+      setForm(false)
     },
 
     onError: (error) => {
@@ -58,11 +53,7 @@ const ProductListing = () => {
     formData.append('Description', description);
     formData.append('Price', Number(price));
     // formData.append('Price', +price);
-    // formData.append('deliveryTime', deliveryTime);
-    // formData.append('shippingFee', shippingFee);
-    // formData.append('shippingServices', shippingServices);
 
-    // Append each image and video file to the FormData
     imageFiles.forEach((file) => formData.append('ProductImages', file));
     // videoFiles.forEach((file) => formData.append('productVideos', file));
 
@@ -75,19 +66,12 @@ const ProductListing = () => {
     // setDescription('');
     // setImageFiles([]);
     // setVideoFiles([]);
-    // setDeliveryTime(1);
-    // setShippingFee('');
-    // setShippingServices('');
   };
 
   return (
     <div className="product-listing-section">
-      <div className="shop-heading mb-3 mt-5 my-3">
-        <h2 className="mb-2 mt-5">Creating a listing</h2>
-        <p className="mb-5">
-          Add some photos and details about your item. Fill out what you can for
-          now--you'll be able to edit this later.
-        </p>
+      <div className="shop-heading mb-3 my-3">
+        <h2 className="mb-2">Upload Item</h2>        
       </div>
       <div>
         <ProductListingImageUpload
@@ -104,22 +88,16 @@ const ProductListing = () => {
           category={category}
           productName={productName}
           price={price}
-        />
-        <ProductListingShipping
-          setDeliveryTime={setDeliveryTime}
-          setShippingFee={setShippingFee}
-          setShippingServices={setShippingServices}
-          deliveryTime={deliveryTime}
-          shippingFee={shippingFee}
-          shippingServices={shippingServices}
-        />
+        /> 
       </div>
       <div className="justify-between m-2 shop-buttons mt-5 pt-5">
         <Button color="#E04F16" background="#fff" text="Cancel" />
-        <Button handleClick={handleSubmit} />
+        <Button text='Upload' handleClick={handleSubmit} />
       </div>
     </div>
   );
 };
 
-export default ProductListing;
+export default ProductUploadForm;
+
+

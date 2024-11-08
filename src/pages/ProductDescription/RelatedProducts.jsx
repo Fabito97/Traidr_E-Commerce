@@ -1,48 +1,18 @@
+import React from 'react'
 import { FaCartShopping } from 'react-icons/fa6';
-import StarRating from '../../components/StarRating';
-import {currency } from '../../../utils/cartUtils';
-import { getData } from '../../../utils/api';
-import { useQuery } from '@tanstack/react-query';
-import { useCart } from '../../context/cartContext';
-import { useNavigate } from 'react-router-dom';
+import { currency } from '../../../utils/cartUtils';
+import StarRating from '../../components/StarRating'
 
+const RelatedProducts = ({relatedProducts}) => {
+  console.log(relatedProducts);
 
-
-const Products = () => {
-  const {addItemToCart} = useCart()
-
-  const navigate = useNavigate();
-  
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['products'],
-    queryFn: () => getData('Product'),
-  });
-  console.log(data);
-
-  const handleCart = (product) => {
-    const cartItem = {
-      id: product.id,
-      name: product.name,
-      description: product.description,
-      price: product.price,
-      image: product.images.$values[0]
-    }
-    console.log("Adding product to cart:", cartItem);
-
-   addItemToCart(cartItem)
-  }
-  
   return (
     <>
-      <div className="productSection p-4">
-        <div className="products">
-          <div className="products_h3">
-            <h1 className="mb-3">Trending Sales</h1>
-          </div>
-          <div className="productGrid grid-md">
-            {data?.map((product) => {
+       <div className="related-products mt-5">         
+          <div className="productGrid grid">
+            {relatedProducts?.map((product) => {
               return (
-                <div onClick={() => navigate(`/product-description/${product.id}`)}                
+                <div  onClick={() => navigate(`/product-description/${product.id}`)}                
                   key={product.id}
                   className="productGrid_item "
                 >
@@ -50,7 +20,7 @@ const Products = () => {
                     <div className="product-img">
                       <img
                         className=""
-                        src={product.images.$values[0]}
+                        src={product.images?.$values[0]}
                         alt={product.title}
                       />
                     </div>
@@ -83,11 +53,8 @@ const Products = () => {
             })}
           </div>
         </div>
-      </div>
     </>
-  );
-};
+  )
+}
 
-
-
-export default Products;
+export default RelatedProducts

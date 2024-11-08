@@ -1,4 +1,6 @@
 import axios from "axios";
+import apiClient from "./apiClient";
+import apiFileClient from './apiFileClient'
 
 
 const baseUrl = 'https://localhost:7268/api';
@@ -7,19 +9,32 @@ const productApiUrl = `${baseUrl}/Product`;
 // Get all products
 export const getData = async (url) => {
     try {
-        const res = await axios.get(`${baseUrl}/${url}`);
+        const res = await apiClient.get(`/${url}`);
+        console.log(res.data.data);
         console.log(res.data.data);
 
-        return res.data.data.$values ? res.data.data.$values : res.data.data;
+        return res.data.data.$values ? res.data.data.$values : res.data.data ? res.data.data : res.data;
     } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error:", error);
+       throw error.response?.data || new Error("Unknown error")
+    }
+};
+
+export const getShopData = async (url) => {
+    try {
+        const res = await apiClient.get(`/${url}`);
+        
+        return res.data
+    } catch (error) {
+        console.error("Error:", error);
+       throw error.response?.data || new Error("Unknown error")
     }
 };
 
 // Get a single product by ID
 export const getDataById = async (id) => {
     try {
-        const res = await axios.get(`${productApiUrl}/${id}`);
+        const res = await apiClient.get(`${productApiUrl}/${id}`);
         return res.data.data.$values;
     } catch (error) {
         console.error(`Error fetching product with ID ${id}:`, error);
@@ -30,13 +45,22 @@ export const getDataById = async (id) => {
 export const postData = async ({ url, data }) => {
     console.log("Data being sent:", data);
     try {
-        const res = await axios.post(`${baseUrl}/${url}`, data, {
-            headers: { "Content-Type": "application/json" }
-        });
+        const res = await apiClient.post(`/${url}`, data);
         return res.data;
     } catch (error) {
-        console.error("Error creating product:", error);
-       throw error.response?.data || new Error("Unknown erro")
+        console.error("Error:", error);
+       throw error.response?.data || new Error("Unknown error")
+    }
+};
+
+export const postFormData = async ({ url, data }) => {
+    console.log("Data being sent:", data);
+    try {
+        const res = await apiFileClient.post(`/${url}`, data);
+        return res.data;
+    } catch (error) {
+        console.error("Error:", error);
+       throw error.response?.data || new Error("Unknown error")
     }
 };
 

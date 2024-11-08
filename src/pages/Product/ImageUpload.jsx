@@ -3,7 +3,7 @@ import FormGroup from '../../components/FormGroup';
 import './Product.css';
 import { FiPlus } from 'react-icons/fi';
 
-const ImageUpload = () => {
+const ImageUpload = ({handleChange}) => {
   return (
     <div     
       className="border p-2 flex justify-center image-upload-card"
@@ -20,6 +20,7 @@ const ImageUpload = () => {
           type="file"
           accept="image/*"
           id="imageUpload"
+          onChange={handleChange}
         />
       </FormGroup>
     </div>

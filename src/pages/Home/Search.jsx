@@ -1,18 +1,17 @@
 import { useState } from "react";
 
 const Search = () => {
-  const [task, setTask] = useState();
-  const handleInputChange = (e) => {
-    setTask(e.target.value);
-  };
+  const [query, setQuery] = useState();
+
+
   return (
     <>
       <input
         type="text"
         placeholder="I am looking for..."
         className="searchInput"
-        value={task}
-        onChange={handleInputChange}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
       />
       <button className="searchButton">
         Search

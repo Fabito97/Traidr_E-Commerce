@@ -7,6 +7,9 @@ import profileImage from '../assets/profile-image.png';
 import { FaCartShopping } from 'react-icons/fa6';
 import { useCart } from '../context/cartContext';
 import { isUserLoggedIn } from '../../utils/auth';
+import { toast } from 'react-toastify';
+import { useQuery } from '@tanstack/react-query';
+import { getData, getShopData } from '../../utils/api';
 
 const style = {
   borderRadius: '50%',
@@ -35,6 +38,19 @@ const NavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const loggedin = isUserLoggedIn()
+
+  const handleLogout = () => {
+    localStorage.removeItem('userToken');
+    toast.info("Successfully logged out")
+    navigate('/'); 
+  };
+
+  const {data: shop} = useQuery({
+    queryKey: ['shopOwner'],
+    queryFn: () => getShopData('Shop/shop-owner')
+  })
+  console.log(shop);
   return (
     <div className="shadow nav" style={{ position: 'relative' }}>
       <div className="navBar container" style={{position:'sticky', top: 0}}>
@@ -58,7 +74,7 @@ const NavBar = () => {
             />
           </span>
 
-          {!isUserLoggedIn ? (
+          {!loggedin ? (
             <div >
               <Button
                 handleClick={() => navigate('/login')}
@@ -72,23 +88,32 @@ const NavBar = () => {
             </div>
           ) : (
             <div className="nav-elements flex align-center">
-              <span style={{ position: 'relative' }}>
+              {/* <span style={{ position: 'relative' }}>
                 <small style={style.countStyle}>1</small>
                 <MdNotifications size={20} />
               </span>
 
               <div style={style} className="profile">
                 <img width={50} src={profileImage} alt="" />
-              </div>
+              </div> */}
 
-              {location.pathname === '/userloggedin' ? (
+              {location.pathname === '/userloggedin' && shop  ? (
                 <Button
-                  handleClick={() => navigate('/shop')}
-                  text="Start Selling"
+                  handleClick={() => navigate('/product')}
+                  text="Go to shop"
                 />
               ) : (
-                ''
+                 location.pathname === '/userloggedin' ? 
+                <Button
+                  handleClick={() => navigate('/shop-opening')}
+                  text="Start Selling"
+                />
+                : ""
               )}
+
+              {loggedin ? 
+              <Button text='Log out' handleClick={handleLogout}/> 
+              : ""}
             </div>
           )}
         </div>

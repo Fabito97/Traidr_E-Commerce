@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../../components/Button';
 import BusinessInfoForm from './BusinessInfoForm';
 import ProductListing from './ProductListingSection';
@@ -7,34 +7,46 @@ import ShopForm from './ShopForm';
 import ShopOpeningSection from './ShopOpeningSection';
 import ShopProgressBar from './ShopProgressBar';
 import ShopSecurity from './ShopSecurity';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import NavBar from '../../components/Navbar';
 
 const Shop = () => {
   const [toggle, setToggle] = useState(1);
   const [isChecked, setIsChecked] = useState(false);
 
   const navigate = useNavigate();
-  
-  const handleToggle = () => {
-    toggle >= 4 ? navigate('/product'):
-    setToggle(toggle + 1)
-  }
+  const location = useLocation();
 
-  return (
-    <section className="container pt-4 pb-4 shop">
-      
-      <ShopProgressBar toggle={toggle}/>
+  useEffect(() => {
+    if (location.pathname === '/shop-opening') {
+      setToggle(1);
+    } else if (location.pathname === '/shop-product-listing') {
+      setToggle(2);
+    } else if (location.pathname === '/shop-business-info') {
+      setToggle(3);
+    } else if (location.pathname === '/shop-security') {
+      setToggle(4);
+    }
+  }, [location.pathname]);
 
-      {toggle === 1 && <ShopOpeningSection />}
-      {toggle === 2 && <ProductListing />}
-      {toggle === 3 && <BusinessInfoForm />}
-      {toggle === 4 && <ShopSecurity />}
+  // const handleToggle = () => {
+  //   toggle >= 4 ? navigate('/product'):
+  //   setToggle(toggle + 1)
+  // }
 
-     
-      <div className="justify-between m-2 shop-buttons mt-5">
-        <Button color="#E04F16" background="#fff" text="Cancel" />
-        <Button handleClick={handleToggle}/>
+  return (  
+    <section>
+        <NavBar/>
+      <div className="container pt-4 pb-4 shop">
+        
+        <ShopProgressBar toggle={toggle}/>
+
+        <Outlet/>
+
       </div>
+     
+
+
     </section>
   );
 };

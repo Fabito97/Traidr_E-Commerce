@@ -1,5 +1,10 @@
+import {useNavigate } from "react-router-dom";
+import Button from "../../components/Button";
+
 const ShopSecurity = () => {
+  const navigate = useNavigate()
   return (
+    <>
     <div className="shop-security-section mt-5 mb-5">
       <h3 className="mb-2 text-center">Keep your shop Safe</h3>
       <p className="mb-3 faint">
@@ -33,6 +38,11 @@ const ShopSecurity = () => {
         support@shopsite.com with any security questions or concerns.
       </p>
     </div>
+    <div className="justify-between m-2 shop-buttons mt-5">
+        <Button color="#E04F16" background="#fff" text="Cancel" />
+        <Button text="Continue" handleClick={() => navigate('/product')}/>
+      </div>
+    </>
   );
 };
 
