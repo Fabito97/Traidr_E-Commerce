@@ -31,6 +31,11 @@
   grid-template-columns:  repeat(auto-fill,  minmax(85px, 1fr)); /* Responsive columns */
 }
 
+.inventory:last-child {
+  border-bottom: none !important;
+  margin-bottom: -2rem;
+}
+
 @media screen and (max-width:850px) {
   .upload-item .flex {
     flex-direction: column;

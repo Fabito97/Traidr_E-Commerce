@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { postFormData } from '../../../utils/api';
 import { toast } from 'react-toastify';
+import Loading from '../../components/Loading';
 
 const ProductListing = () => {
   const [imageFiles, setImageFiles] = useState([]);
@@ -24,7 +25,7 @@ const ProductListing = () => {
 
   const navigate = useNavigate();
 
-  const { mutate: createProduct } = useMutation({
+  const { mutate: createProduct, isPending } = useMutation({
     mutationFn: (product) =>
       postFormData({ url: 'Product/Create-Product', data: product }),
 
@@ -34,9 +35,13 @@ const ProductListing = () => {
       navigate('/shop-business-info');
     },
 
+    
+
     onError: (error) => {
       toast.error(`Failed to save: ${error.message}`);
     },
+
+    
   });
 
   const handleImageChange = (e) => {
@@ -80,6 +85,9 @@ const ProductListing = () => {
     // setShippingServices('');
   };
 
+  if (isPending) return <Loading/>
+
+
   return (
     <div className="product-listing-section">
       <div className="shop-heading mb-3 mt-5 my-3">
@@ -94,7 +102,7 @@ const ProductListing = () => {
           handleChange={handleImageChange}
           images={imageFiles}
         />
-        <ProductListingVideoUpload handleChange={handleVideoChange} />
+        {/* <ProductListingVideoUpload handleChange={handleVideoChange} /> */}
         <ProductListingDetails
           setDescription={setDescription}
           setProductName={setProductName}

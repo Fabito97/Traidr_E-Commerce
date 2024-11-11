@@ -3,6 +3,7 @@ import {
   BrowserRouter,
   createBrowserRouter,
   RouterProvider,
+  ScrollRestoration,
 } from 'react-router-dom';
 
 import './utilities.css';
@@ -31,6 +32,23 @@ import ShopOpeningSection from './pages/Shop/ShopOpeningSection';
 import ProductListing from './pages/Shop/ProductListingSection';
 import ShopSecurity from './pages/Shop/ShopSecurity';
 import BusinessInfoForm from './pages/Shop/BusinessInfoForm';
+import ProtectedRoute from './components/ProtectedRoute';
+import { isUserLoggedIn } from '../utils/auth';
+import ScrollToTop from '../utils/ScrollToTop';
+import ProductUploadForm from './pages/Product/ProductUploadForm';
+
+
+function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    setIsAuthenticated(isUserLoggedIn())
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
 const router = createBrowserRouter([
   {
@@ -43,11 +61,23 @@ const router = createBrowserRouter([
       },
       {
         path: '/userloggedin',
-        element: <UserloggedinScreen />,
+        element: 
+          
+            <UserloggedinScreen />,
+    
+        
       },
       {
         path: '/product',
-        element: <Product />,
+        element: 
+            <Product />,
+      
+      },
+      {
+        path: '/product-upload',
+        element: 
+            <ProductUploadForm />,
+        
       },
       {
         path: '/product-description/:id',
@@ -65,19 +95,29 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/shop-opening',
-        element: <ShopOpeningSection />,
+        element: 
+       
+            <ShopOpeningSection />,
+        
       },
       {
         path: '/shop-product-listing',
-        element: <ProductListing />,
+        element: 
+            <ProductListing />,
+        
       },
       {
         path: '/shop-business-info',
-        element: <BusinessInfoForm />,
+        element: 
+          
+            <BusinessInfoForm />,
+        
       },
       {
         path: '/shop-security',
-        element: <ShopSecurity />,
+        element:
+            <ShopSecurity />,
+    
       },
     ],
   },
@@ -104,8 +144,12 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/checkout",
-    element: <Checkout/>, // Checkout layout
+    path: '/checkout',
+    element: 
+     
+        <Checkout />, 
+     
+    
   },
   {
     path: '/admin',
@@ -117,21 +161,26 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '*',
+    element: <Loading />, // Admin layout
+    
+  },
 ]);
 
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <>
-      {isLoading ? <Loading /> : <RouterProvider router={router} />}
+      
+      {isLoading ? <Loading /> : 
+      <>
+      <RouterProvider router={router} >
+        <ScrollToTop/>
+
+      </RouterProvider>
+      </>
+      }
       <ToastContainer position="top-right" autoClose={3000} />
     </>
   );

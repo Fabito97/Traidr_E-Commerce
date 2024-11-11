@@ -29,7 +29,7 @@ const Main = () => {
                 <div className="icon-container">
                      <FontAwesomeIcon icon={element.icon} className="icon" />
                 </div>
-                 {element.text} 
+                 <p className="mt-1">{element.text} </p>
                 </div>
               </div>
             ))}

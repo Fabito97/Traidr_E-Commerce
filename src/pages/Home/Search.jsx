@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../../components/Button";
 
 const Search = () => {
   const [query, setQuery] = useState();
@@ -12,10 +13,8 @@ const Search = () => {
         className="searchInput"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-      />
-      <button className="searchButton">
-        Search
-      </button>
+      />     
+      <Button text="Search" padding="13px 20px"/>
     </>
   );
 };

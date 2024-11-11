@@ -19,17 +19,17 @@ const Login = () => {
     mutationFn: (user) => postData({ url: 'Account/login', data: user }),
     onSuccess: (data) => {
       console.log(data);
-      
+
       if (data && data.token) {
         localStorage.setItem('userToken', data.token);
         toast.success('Log in successful');
 
-        navigate('/userloggedin')
+        navigate('/userloggedin');
       }
     },
 
     onError: (error) => {
-      toast.error(`Login failed:  ${error.message || "Invalid credentials"}`);
+      toast.error(`Login failed:  ${error.message || 'Invalid credentials'}`);
     },
   });
 
@@ -37,8 +37,8 @@ const Login = () => {
     e.preventDefault();
     const user = { email, password };
     logInUser(user);
-    setEmail('')
-    setPassword('')
+    setEmail('');
+    setPassword('');
   };
   return (
     <AuthContainer>
@@ -48,7 +48,7 @@ const Login = () => {
         <input
           value={email}
           type="text"
-          placeholder="Username"
+          placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
         />
         <input

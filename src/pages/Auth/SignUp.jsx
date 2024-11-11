@@ -49,7 +49,7 @@ const SignUp = () => {
         <input
           value={userName}
           type="text"
-          placeholder="Name"
+          placeholder="UserName"
           onChange={(e) => setUserName(e.target.value)}
         />
         <input
@@ -64,18 +64,21 @@ const SignUp = () => {
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <label>How did you hear about us?</label>
-        <select
-          value={referralSource}
-          onChange={(e) => setReferralSource(Number(e.target.value))}
-        >
-          <option value={0}>Facebook</option>
-          <option value={1}>Youtube</option>
-          <option value={2}>Instagram</option>
-          <option value={3}>Linkedin</option>
-          <option value={4}>Friend</option>
-          <option value={5}>Others</option>
-        </select>
+        <div className='text-left mt-1' style={{fontSize:'12px'}}>
+          <label>How did you hear about us?</label>
+          <select
+            value={referralSource}
+            onChange={(e) => setReferralSource(Number(e.target.value))}
+          >
+            <option value={0}>Facebook</option>
+            <option value={1}>Youtube</option>
+            <option value={2}>Instagram</option>
+            <option value={3}>Linkedin</option>
+            <option value={4}>Friend</option>
+            <option value={5}>Others</option>
+          </select>
+
+        </div>
         <button className="google-signin">
           <img src={google} alt="Google logo" className="google-logo" />
           Sign in with Google

@@ -11,21 +11,21 @@ const CartSummary = ({ totalPrice }) => {
         <p>Subtotal</p>
         <span>
           {currency}
-          {totalPrice}.00
+          {totalPrice.toLocaleString()}
         </span>
       </div>
       <div className="justify-between pb-1 pt-1 border-b">
         <p>Shipping Fee</p>
         <span>
           {currency}
-          {ShippingFee}.00
+          {ShippingFee.toLocaleString()}
         </span>
       </div>
       <div className="justify-between font-bold pb-1 pt-1">
         <p>Total</p>
         <span>
           {currency}
-          {totalPrice + ShippingFee}.00
+          {(totalPrice + ShippingFee).toLocaleString()}
         </span>
       </div>
     </div>

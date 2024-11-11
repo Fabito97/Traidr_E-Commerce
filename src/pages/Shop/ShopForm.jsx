@@ -18,7 +18,7 @@ const ShopForm = () => {
     onSuccess: (data) => {
       console.log(data);
       toast.success('Shop successfully saved');
-      navigate('/shop-product-listiong');
+      navigate('/shop-product-listing');
     },
 
     onError: (error) => {

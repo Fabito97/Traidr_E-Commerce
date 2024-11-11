@@ -2,33 +2,42 @@ import { Link, useParams } from 'react-router-dom';
 import './ProductDescription.css';
 import profileImage from '../../assets/profile-image.png';
 import Button from '../../components/Button';
-import ProductCard from '../../components/ProductCard';
 import { useQuery } from '@tanstack/react-query';
 import { getData } from '../../../utils/api';
 import { currency } from '../../../utils/cartUtils';
 import { useCart } from '../../context/cartContext';
-import { useState } from 'react';
 import ReviewRating from './ReviewRating';
 import { FaExchangeAlt, FaShippingFast } from 'react-icons/fa';
 import { FaMessage, FaTruck } from 'react-icons/fa6';
 import RelatedProducts from './RelatedProducts';
+import { useEffect, useState } from 'react';
 
 const ProductDescription = () => {
   const { id } = useParams();
   const { addItemToCart } = useCart();
+  // const [productImages, setProductImages] = useState();
+  // const [productElements, setProductElements] = useState();
+  // const [reviews, setReviews] = useState();
+  // const [seller, setSeller] = useState();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['product', id],
     queryFn: () => getData(`Product/${id}`),
   });
-  console.log(data);
+
   const { data: relatedProducts } = useQuery({
     queryKey: ['relatedProducts', id],
     queryFn: () => getData(`Product/Category/${data.categoryId}`),
-    enabled: !!id,
+    enabled: !!data?.categoryId,
   });
+
+
   if (isLoading) return <p>Loading product...</p>;
   if (error) return <p>Error loading product details.</p>;
+
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [])
 
   const handleCart = (product) => {
     const cartItem = {
@@ -48,8 +57,6 @@ const ProductDescription = () => {
   const reviews = data?.reviews.$values || [];
   const seller = data?.seller || [];
 
-
-
   return (
     <div className="container p-5 product-decription">
       <div className="mt-2 mb-2">
@@ -65,8 +72,10 @@ const ProductDescription = () => {
       </div>
       <div className="grid-bg-main mt-2">
         {productImages?.map((img, i) => (
-          <div key={i} className="bg-light img-showcase">
-            <img src={img} alt="" />
+          <div className='overflow-hidden'>
+            <div key={i} className="bg-light img-showcase">
+              <img width={350} src={img} alt="" />
+            </div>
           </div>
         ))}
       </div>

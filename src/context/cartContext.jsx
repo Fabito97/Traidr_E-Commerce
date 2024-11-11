@@ -47,6 +47,18 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  
+const deleteCart = () => {
+  try {
+      setCart([]);
+      localStorage.removeItem('cartItems')
+
+  } catch (error) {
+      console.log("Error removing cart from local storage:", error);
+      
+  }
+}
+
   return (
     <CartContext.Provider
       value={{
@@ -55,6 +67,7 @@ export const CartProvider = ({ children }) => {
         addItemToCart,
         updateCartItemQuantity,
         deleteCartItem,
+        deleteCart,
       }}
     >
       {children}

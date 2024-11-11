@@ -55,3 +55,19 @@ export const deleteCartItem = (productId, newQuantity) => {
       return [];
   }
 };
+
+
+export const deleteCart = () => {
+    try {
+        
+        localStorage.removeItem('cartItems')
+  
+    } catch (error) {
+        console.log("Error removing cart from local storage:", error);
+        
+    }
+  }
+
+export const getTotalPrice = () => {
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  };

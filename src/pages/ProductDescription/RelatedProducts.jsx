@@ -2,9 +2,17 @@ import React from 'react'
 import { FaCartShopping } from 'react-icons/fa6';
 import { currency } from '../../../utils/cartUtils';
 import StarRating from '../../components/StarRating'
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../../context/cartContext';
 
 const RelatedProducts = ({relatedProducts}) => {
-  console.log(relatedProducts);
+  const {addItemToCart} = useCart()
+
+  const navigate = useNavigate()
+
+  const handleCart = (product) => {
+    addItemToCart(product)
+  }
 
   return (
     <>
@@ -12,7 +20,11 @@ const RelatedProducts = ({relatedProducts}) => {
           <div className="productGrid grid">
             {relatedProducts?.map((product) => {
               return (
-                <div  onClick={() => navigate(`/product-description/${product.id}`)}                
+                <div onClick={() => {
+                  navigate(`/product-description/${product.id}`);
+                  window.scrollTo(0, 0)
+                }  
+              }               
                   key={product.id}
                   className="productGrid_item "
                 >

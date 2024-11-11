@@ -1,19 +1,19 @@
 import './Product.css';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import UserShopProfile from './UserShopProfile';
 import Button from '../../components/Button';
 import { useNavigate } from 'react-router-dom';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
-import { getData, getShopData, postData } from '../../../utils/api';
+import { useQuery } from '@tanstack/react-query';
+import { getShopData} from '../../../utils/api';
 import ProductUploadForm from './ProductUploadForm';
+import { currency } from '../../../utils/cartUtils';
 
 const Product = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [images, setImages] = useState([]);
-  const [form, setForm] = useState(false);
+  // const [form, setForm] = useState(false);
 
   const { data, error, isLoading } = useQuery({
     queryKey: ['shop'],
@@ -43,17 +43,23 @@ const Product = () => {
     <div className="p-4 container product-section">
       <UserShopProfile data={data} />
 
-      {form ? (
-        <ProductUploadForm setForm={setForm} />
-      ) : (
-        <Button
-          className={'mt-5'}
-          text="Upload item"
-          handleClick={() => setForm(true)}
-        />
-      )}
+      <div className='flex justify-between'>
 
-      <h2 className="mt-5">Your products</h2>
+        {/* {form ? (
+          <ProductUploadForm setForm={setForm} />
+        ) : ( */}
+          <>
+              <h2 className="mt-5 pt-2">Your products</h2>
+              <Button
+                className={'mt-5'}
+                text="Upload new item"
+                handleClick={() => navigate('/product-upload')}
+                
+              />
+          </>
+            {/* )} */}
+      </div>
+
 
       <div className="p-3 border mt-3 border-radius">
         <div className=" flex justify-between w-100 p-2 border-b">
@@ -66,17 +72,17 @@ const Product = () => {
           <div
             key={product.id}
             style={{ height: '200px', borderBottom: '1px #ddd solid' }}
-            className="flex justify-between align-center text-center"
+            className="flex justify-between align-center text-center inventory"
           >
             <div
               className="border border-radius flex-center p-1"
-              style={{ background: '#ddd', width: '10%' }}
+              style={{ width: '10%' }}
             >
               <img width={100} src={product.images.$values[0]} alt="" />
             </div>
             <span className="text-center">{product.name}</span>
             <small>{product.description}</small>
-            <small>{product.price}</small>
+            <small>{currency}{product.price.toLocaleString()}</small>
           </div>
         ))}
       </div>

@@ -1,8 +1,8 @@
-import { FaCamera } from "react-icons/fa6";
-import FormGroup from "../../../components/FormGroup";
-import ProductCard from "../../../components/ProductCard";
+import { FaCamera } from 'react-icons/fa6';
+import FormGroup from '../../../components/FormGroup';
+import ProductCard from '../../../components/ProductCard';
 
-const ProductListingImageUpload = ({handleChange, images}) => {
+const ProductListingImageUpload = ({ handleChange, images }) => {
   return (
     <div className="m-3 mb-5 border p-5 product-image">
       <div className="grid-bg">
@@ -23,9 +23,12 @@ const ProductListingImageUpload = ({handleChange, images}) => {
             </ul>
           </div>
         </div>
-        {images.length > 0 && images.map((img, i) => (
-          <div key={i}><img src={URL.createObjectURL(img)} alt="" /></div>
-        ))}
+        {images.length > 0 &&
+          images.map((img, i) => (
+            <div className="border border-radius overflow-hidden" key={i}>
+              <img src={URL.createObjectURL(img)} alt="" />
+            </div>
+          ))}
 
         <FormGroup htmlFor="imageUpload" label="">
           <label htmlFor="imageUpload" className="mb-1">
@@ -45,12 +48,10 @@ const ProductListingImageUpload = ({handleChange, images}) => {
             onChange={handleChange}
           />
         </FormGroup>
-        <div>
-        
-        </div>
+        <div></div>
       </div>
     </div>
   );
 };
 
-export default ProductListingImageUpload
+export default ProductListingImageUpload;

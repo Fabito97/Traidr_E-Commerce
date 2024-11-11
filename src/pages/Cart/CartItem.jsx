@@ -1,14 +1,8 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../../components/Button';
-import ProductCard from '../../components/ProductCard';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
 import { currency, updateCartItemQuantity } from '../../../utils/cartUtils';
-import { QueryClient } from '@tanstack/react-query';
-
 
 const CartItem = ({ item, deleteCart, updateCart }) => {
-console.log("See me" , item);
+  console.log('See me', item);
   return (
     <div
       style={{ borderBottom: '1px solid #ddd' }}
@@ -36,17 +30,31 @@ console.log("See me" , item);
           <p className="faint mb-1" style={{ fontSize: '14px', width: '100%' }}>
             {item.description}
           </p>
-          <span className="text-aux">{currency}{item.price}</span>
-          <span className="text-aux"> - {currency}{item.price * item.quantity}</span>
+          <span className="text-aux font-bold">
+            {currency}
+            {item.price.toLocaleString()}
+          </span>
+          <span className="text-aux font-bold">
+            {' '}
+            - {currency}
+            {(item.price * item.quantity).toLocaleString()}
+          </span>
         </div>
       </div>
 
       <div className="flex-column align-center p-2">
         <div className="qty-btn flex align-center">
-          <Button text="-" handleClick={() => updateCart(item.id, item.quantity - 1)}  className={item.quantity === 1 ? "disabled" : ''}/>
+          <Button
+            text="-"
+            handleClick={() => updateCart(item.id, item.quantity - 1)}
+            className={item.quantity === 1 ? 'disabled' : ''}
+          />
           <span className="p-1">{item.quantity}</span>
-          
-          <Button text="+"  handleClick={() => updateCart(item.id, item.quantity + 1)}/>
+
+          <Button
+            text="+"
+            handleClick={() => updateCart(item.id, item.quantity + 1)}
+          />
         </div>
 
         <Button

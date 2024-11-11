@@ -1,7 +1,7 @@
-import Hiro from './Hiro'
-import './Home.css'
-import Main from './Main'
-import Products from './Products'
+import Hiro from './Hiro';
+import './Home.css';
+import Main from './Main';
+import Products from './Products';
 
 const Home = () => {
   return (
@@ -9,8 +9,8 @@ const Home = () => {
       <Hiro />
       <Main />
       <Products />
-   </div> 
-  )
-}
+    </div>
+  );
+};
 
-export default Home
+export default Home;

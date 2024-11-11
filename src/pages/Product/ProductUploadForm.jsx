@@ -7,8 +7,9 @@ import { toast } from 'react-toastify';
 import ProductListingImageUpload from '../Shop/components/ImageUploadForm';
 import ProductListingVideoUpload from '../Shop/components/VideoUploadFormUplod';
 import ProductListingDetails from '../Shop/components/ProductListingDetails';
+import Loading from '../../components/Loading';
 
-const ProductUploadForm = ({setForm}) => {
+const ProductUploadForm = () => {
   const [imageFiles, setImageFiles] = useState([]);
   const [videoFiles, setVideoFiles] = useState([]);
   const [productName, setProductName] = useState('');
@@ -18,7 +19,9 @@ const ProductUploadForm = ({setForm}) => {
 
   const queryClient = useQueryClient()
 
-  const { mutate: createProduct } = useMutation({
+  const navigate = useNavigate()
+
+  const { mutate: createProduct, isPending } = useMutation({
     mutationFn: (product) =>
       postFormData({ url: 'Product/Create-Product', data: product }),
 
@@ -26,7 +29,9 @@ const ProductUploadForm = ({setForm}) => {
       toast.success('Product successfully saved');
       queryClient.invalidateQueries(['shop']);
       queryClient.invalidateQueries(['products'])
-      setForm(false)
+      
+
+      navigate('/product')
     },
 
     onError: (error) => {
@@ -68,9 +73,14 @@ const ProductUploadForm = ({setForm}) => {
     // setVideoFiles([]);
   };
 
+
+
+  if(isPending) return <Loading/>
+
+
   return (
-    <div className="product-listing-section">
-      <div className="shop-heading mb-3 my-3">
+    <div className="product-listing-section container pt-5" style={{margin:'auto'}}>
+      <div className="shop-heading mb-3 my-3 pt-5">
         <h2 className="mb-2">Upload Item</h2>        
       </div>
       <div>
@@ -78,7 +88,7 @@ const ProductUploadForm = ({setForm}) => {
           handleChange={handleImageChange}
           images={imageFiles}
         />
-        <ProductListingVideoUpload handleChange={handleVideoChange} />
+        {/* <ProductListingVideoUpload handleChange={handleVideoChange} /> */}
         <ProductListingDetails
           setDescription={setDescription}
           setProductName={setProductName}

@@ -4,7 +4,7 @@ const Button = ({
   border = '1px solid #E04F16',
   padding = '8px 10px',
   text = 'Save and continue',
-  borderRadius,
+  borderRadius='5px',
   className,
   handleClick,
   children

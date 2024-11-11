@@ -15,7 +15,13 @@ import runningsneaker from './images/runningsneaker.jpg';
 import sonixtv from './images/sonixtv.jpg';
 import tv from './images/tv.jpg';
 import { ProductGrid } from './ProductGrid';
+import { SearchSortBar } from './SearchSortBar';
 import { Sidebar } from './Sidebar';
+import { useCart } from '../../context/cartContext';
+import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { getData } from '../../../utils/api';
+import { useEffect, useState } from 'react';
 
 export const products = [
   { name: 'Fryer', price: 'N50,000', image: fryers },
@@ -38,16 +44,67 @@ export const products = [
 ];
 
 const UserloggedinScreen = () => {
+  const { addItemToCart } = useCart();
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['products'],
+    queryFn: () => getData('Product'),
+  });
+
+  useEffect(() => {
+    setProducts(data);
+    setFilteredProducts(data);
+  }, [data]);
+
+  const handleSearch = (e) => {
+    
+
+    const searchValue = e.target.value.toLowerCase();
+    setSearchTerm(searchValue);
+    console.log(searchValue);
+
+    const filtered = products.filter((product) =>
+      product.name.toLowerCase().includes(searchTerm)
+    );
+    setFilteredProducts(filtered);
+   
+  };
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error fetching products!</p>;
+
+  const handleCart = (product) => {
+    const cartItem = {
+      id: product.id,
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      image: product.images.$values[0],
+    };
+    console.log('Adding product to cart:', cartItem);
+
+    addItemToCart(cartItem);
+  };
+
   return (
     <div className="container">
       <div className="userloggedin-section ">
-        <Sidebar />
-        <ProductGrid />
+        <Sidebar
+          setFilteredProducts={setFilteredProducts}
+          products={products}
+          setProducts={setProducts}
+        />
+        <section className="mt-5 w-100 product-grid-section">
+          <SearchSortBar handleSearch={handleSearch} />
+          <ProductGrid products={filteredProducts} handleCart={handleCart} />
+        </section>
       </div>
     </div>
   );
 };
-
-
 
 export default UserloggedinScreen;

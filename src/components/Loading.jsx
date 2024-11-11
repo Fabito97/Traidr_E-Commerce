@@ -3,7 +3,7 @@ import { FaSpinner } from 'react-icons/fa6'
 
 const Loading = () => {
   return (
-    <div className='flex-center h-screen bg-primary'>
+    <div className='flex-center h-screen bg-primary' style={{position:"absolute", top:"0", left:'0', width: "100vw", zIndex:'1000'}}>
       <div className='flex-column justify-between align-center'>
         <h1>traidr</h1>
         

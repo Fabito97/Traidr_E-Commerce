@@ -9,11 +9,15 @@ import Loading from '../../components/Loading';
 import { useCart } from '../../context/cartContext';
 import { isUserLoggedIn } from '../../../utils/auth';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
   const navigate = useNavigate();
 
-  const { cart, setCart, updateCartItemQuantity, deleteCartItem } = useCart();
+  const loggedIn = isUserLoggedIn();
+
+
+  const { cart, updateCartItemQuantity, deleteCartItem } = useCart();
 
   const getTotalItems = () => {
     return cart.reduce((total, item) => total + item.quantity, 0);
@@ -23,7 +27,15 @@ const Cart = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
- 
+  const handleCheckout = () => {
+    if (loggedIn === true) {
+      navigate('/checkout');
+    } else {
+      navigate('/login');
+      toast.info('Please login or signup before you proceed to checkout');
+    }
+  };
+
   return (
     <div style={{ minHeight: '90vh' }} className="p-5 container">
       <h2 className="m">Cart</h2>
@@ -45,7 +57,7 @@ const Cart = () => {
       {cart.length !== 0 ? (
         <>
           <CartSummary totalPrice={getTotalPrice()} />
-          <Button text="Proceed to checkout" handleClick={() => isUserLoggedIn ? navigate("/checkout") : navigate('/login')} />
+          <Button text="Proceed to checkout" handleClick={handleCheckout} />
         </>
       ) : (
         ''

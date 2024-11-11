@@ -42,11 +42,15 @@ const Products = () => {
           <div className="productGrid grid-md">
             {data?.map((product) => {
               return (
-                <div onClick={() => navigate(`/product-description/${product.id}`)}                
+                <div onClick={() => {
+                  navigate(`/product-description/${product.id}`);
+                  window.scrollTo(0, 0)
+                }
+              }                
                   key={product.id}
                   className="productGrid_item "
                 >
-                  <div className="img-wrap">
+                  <div className="img-wrap overflow-hidden">
                     <div className="product-img">
                       <img
                         className=""
