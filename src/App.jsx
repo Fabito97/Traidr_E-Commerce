@@ -37,150 +37,124 @@ import { isUserLoggedIn } from '../utils/auth';
 import ScrollToTop from '../utils/ScrollToTop';
 import ProductUploadForm from './pages/Product/ProductUploadForm';
 
-
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    setIsAuthenticated(isUserLoggedIn())
+    setIsAuthenticated(isUserLoggedIn());
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <RootLayout />, // root / normal layout
-    children: [
-      {
-        path: '',
-        element: <Home />,
-      },
-      {
-        path: '/userloggedin',
-        element: 
-          
-            <UserloggedinScreen />,
-    
-        
-      },
-      {
-        path: '/product',
-        element: 
-            <Product />,
-      
-      },
-      {
-        path: '/product-upload',
-        element: 
-            <ProductUploadForm />,
-        
-      },
-      {
-        path: '/product-description/:id',
-        element: <ProductDescription />,
-      },
-      {
-        path: '/cart',
-        element: <Cart />,
-      },
-    ],
-  },
-  {
-    path: '/',
-    element: <Shop />, // Sign up related layout
-    children: [
-      {
-        path: '/shop-opening',
-        element: 
-       
-            <ShopOpeningSection />,
-        
-      },
-      {
-        path: '/shop-product-listing',
-        element: 
-            <ProductListing />,
-        
-      },
-      {
-        path: '/shop-business-info',
-        element: 
-          
-            <BusinessInfoForm />,
-        
-      },
-      {
-        path: '/shop-security',
-        element:
-            <ShopSecurity />,
-    
-      },
-    ],
-  },
-  {
-    path: '/',
-    element: <AuthLayout />, // Sign up related layout
-    children: [
-      {
-        path: '/signup',
-        element: <SignUp />,
-      },
-      {
-        path: '/login',
-        element: <Login />,
-      },
-      {
-        path: '/reset-password',
-        element: <PasswordResetRequest />,
-      },
-      {
-        path: '/send-reset-password',
-        element: <PasswordResetForm />,
-      },
-    ],
-  },
-  {
-    path: '/checkout',
-    element: 
-     
-        <Checkout />, 
-     
-    
-  },
-  {
-    path: '/admin',
-    element: <AdminLayout />, // Admin layout
-    children: [
-      {
-        path: '',
-        element: <Admin />,
-      },
-    ],
-  },
-  {
-    path: '*',
-    element: <Loading />, // Admin layout
-    
-  },
-]);
-
-
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <RootLayout />, // root / normal layout
+      children: [
+        {
+          path: '',
+          element: <Home />,
+        },
+        {
+          path: '/userloggedin',
+          element: <UserloggedinScreen />,
+        },
+        {
+          path: '/product',
+          element: <Product />,
+        },
+        {
+          path: '/product-upload',
+          element: <ProductUploadForm />,
+        },
+        {
+          path: '/product-description/:id',
+          element: <ProductDescription />,
+        },
+        {
+          path: '/cart',
+          element: <Cart />,
+        },
+      ],
+    },
+    {
+      path: '/',
+      element: <Shop />, // Sign up related layout
+      children: [
+        {
+          path: '/shop-opening',
+          element: <ShopOpeningSection />,
+        },
+        {
+          path: '/shop-product-listing',
+          element: <ProductListing />,
+        },
+        {
+          path: '/shop-business-info',
+          element: <BusinessInfoForm />,
+        },
+        {
+          path: '/shop-security',
+          element: <ShopSecurity />,
+        },
+      ],
+    },
+    {
+      path: '/',
+      element: <AuthLayout />, // Sign up related layout
+      children: [
+        {
+          path: '/signup',
+          element: <SignUp />,
+        },
+        {
+          path: '/login',
+          element: <Login />,
+        },
+        {
+          path: '/send-reset-password',
+          element: <PasswordResetRequest />,
+        },
+        {
+          path: '/reset-password',
+          element: <PasswordResetForm />,
+        },
+      ],
+    },
+    {
+      path: '/checkout',
+      element: <Checkout />,
+    },
+    {
+      path: '/admin',
+      element: <AdminLayout />, // Admin layout
+      children: [
+        {
+          path: '',
+          element: <Admin />,
+        },
+      ],
+    },
+    {
+      path: '*',
+      element: <Loading />, // Admin layout
+    },
+  ]);
 
   return (
     <>
-      
-      {isLoading ? <Loading /> : 
-      <>
-      <RouterProvider router={router} >
-        <ScrollToTop/>
-
-      </RouterProvider>
-      </>
-      }
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <RouterProvider router={router}>
+            <ScrollToTop />
+          </RouterProvider>
+        </>
+      )}
       <ToastContainer position="top-right" autoClose={3000} />
     </>
   );

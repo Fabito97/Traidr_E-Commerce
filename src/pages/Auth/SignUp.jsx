@@ -8,8 +8,13 @@ import { useNavigate } from 'react-router-dom';
 import { postData } from '../../../utils/api.js';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 const SignUp = () => {
+  const clientId = import.meta.env.VITE_CLIENT_ID;
+  console.log("Client Id:", clientId);
+
+  
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -17,29 +22,48 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [referralSource, setReferralSource] = useState('');
 
-  const { mutate: signupUser } = useMutation({
-    mutationFn: (user) => postData({ url: 'Account/sign-up', data: user }),
+  const { mutate: authenticateUser } = useMutation({
+    mutationFn: ({url, data}) => postData({ url, data }),
 
     onSuccess: (data) => {
       console.log(data);
-      toast.success('Registration successful');
-      navigate('/login');
+
+      if (data?.token) {
+        localStorage.setItem('userToken', data.token);
+        toast.success('Login successful');
+        navigate('/userloggedin')
+      } else {
+        toast.success("Registration successful");
+        navigate('/login');
+      }
     },
 
     onError: (error) => {
-      toast.error(`signup failed:  ${error.message}`);
+      toast.error(`Authentication failed:  ${error.message || 'Something went wrong'}`);
     },
   });
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const user = { userName, email, password, referralSource };
-    signupUser(user);
+    authenticateUser({url: "Account/sign-up", data: user});
     setEmail('');
     setUserName('');
     setReferralSource(0);
     setPassword('');
   };
+
+  const handleGoogleSuccess = (response) => {
+    console.log(response.credential);
+    const tokenData = { token: response.credential };
+    
+    authenticateUser({url: "Account/GoogleAuth", data: tokenData});
+  };
+
+  const handleGoogleError = (error) => {
+    toast.error(error.message || "Unable to verify Gmail account")
+  }
 
   return (
     <AuthContainer>
@@ -64,7 +88,7 @@ const SignUp = () => {
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <div className='text-left mt-1' style={{fontSize:'12px'}}>
+        <div className="text-left mt-1" style={{ fontSize: '12px' }}>
           <label>How did you hear about us?</label>
           <select
             value={referralSource}
@@ -77,12 +101,14 @@ const SignUp = () => {
             <option value={4}>Friend</option>
             <option value={5}>Others</option>
           </select>
-
         </div>
-        <button className="google-signin">
-          <img src={google} alt="Google logo" className="google-logo" />
-          Sign in with Google
-        </button>
+        <GoogleOAuthProvider clientId={clientId}>
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            text="Sign in with Google"
+          />
+        </GoogleOAuthProvider>
         <button onClick={handleSubmit} type="submit" className="signup-btn">
           Sign Up
         </button>

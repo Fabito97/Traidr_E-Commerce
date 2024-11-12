@@ -8,15 +8,17 @@ import { useNavigate } from 'react-router-dom';
 import { getData, postData } from '../../../utils/api.js';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 
 const Login = () => {
+  const clientId = import.meta.env.VITE_CLIENT_ID;
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const { mutate: logInUser } = useMutation({
-    mutationFn: (user) => postData({ url: 'Account/login', data: user }),
+    mutationFn: ({url, data}) => postData({ url, data }),
     onSuccess: (data) => {
       console.log(data);
 
@@ -32,14 +34,27 @@ const Login = () => {
       toast.error(`Login failed:  ${error.message || 'Invalid credentials'}`);
     },
   });
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = { email, password };
-    logInUser(user);
+    const userDetails = { email, password };
+    logInUser({url: "Account/login", data: userDetails});
     setEmail('');
     setPassword('');
   };
+
+  const handleGoogleSuccess = (response) => {
+    console.log(response.credential);
+    const tokenData = { token: response.credential };
+    
+    logInUser({url: "Account/GoogleAuth", data: tokenData});
+  };
+
+  const handleGoogleError = (error) => {
+    toast.error(error.message || "Unable to verify gmail account")
+  }
+
   return (
     <AuthContainer>
       <img src={logo} alt="Traidr logo" className="logo" />
@@ -57,13 +72,16 @@ const Login = () => {
           type="password"
           placeholder="Password"
         />
-        <a href="/forgot-password" className="forgot-password">
+        <a href="/send-reset-password" className="forgot-password">
           Forgot Password?
         </a>
-        <button className="google-signin">
-          <img src={google} alt="Google logo" className="google-logo" />
-          Sign in with Google
-        </button>
+        <GoogleOAuthProvider clientId={clientId}>
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleError}
+            text='Sign in with Google'
+          />
+        </GoogleOAuthProvider>       
         <button onClick={handleSubmit} type="submit" className="login-btn">
           Log In
         </button>
